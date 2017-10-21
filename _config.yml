@@ -23,11 +23,11 @@ footer-links:
   flickr:
   github: abhishm/
   instagram:
-  linkedin: https://www.linkedin.com/in/abhishm/
+  linkedin: abhishm/
   pinterest:
   rss: # just type anything here for a working RSS icon
   twitter: 
-  stackoverflow: # your stackoverflow profile, e.g. "users/4001737/user31688"
+  stackoverflow: users/4001737/user31688
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
 
