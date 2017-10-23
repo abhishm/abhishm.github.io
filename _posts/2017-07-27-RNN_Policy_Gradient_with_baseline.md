@@ -69,7 +69,7 @@ $$
 Y = \sum_{t=0}^{T-1}  \nabla_\theta\log \pi_\theta(a_t|s_t) (R_t - f(s_t))
 $$
 
-where $$f(s_t)$$ is a random variable that depends on $s_t$ alone.
+where $$f(s_t)$$ is a random variable that depends on $$s_t$$ alone.
 
 We will first show that $$E[Y] = E[X]$$. To show this, we essentially need to show that $$E[\nabla_\theta\log \pi_\theta(a_t|s_t) f(s_t)] = 0$$. This is true because  
 
