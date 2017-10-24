@@ -51,7 +51,7 @@ $$
 
 Where $$X_1, X_2, \ldots, X_n$$ are independent and identically distributed random variable as random variable $$X$$. In short, to estimate $$E[X]$$, generate lot of samples according to distribution of random variable $$X$$ and the mean of these samples will be close to $$E[X]$$. This raises a couple of questions $$-$$ How many samples? How close to true value?  
 
-If we use $$n$$ samples, our estimate for $$E[X]$$ is $$\mu_n = \frac{X_1 + X_2 + \ldots + X_n}{n}$$. $$\mu_n$$ is a random variable with mean $$E[X]$$ and variance $$\frac{\sigma^2}{n}$$ where $$\sigma^2$$ is the variance of random variable $$X$$. This imply that $$\mu_n$$ is an unbiased estimate of $$E[X]$$. However, the RMSE in the estimate of $$E[X]$$ by $$\mu_n$$ only reduces as $$O(n^{-1/2})$$. This is a bad news. If we want to improve our estimate by three decimal points, we need 1 million more data points. So a question comes, how can we reduce the variance in the Monte-Carlo estimate.
+If we use $$n$$ samples, our estimate for $$E[X]$$ is $$\mu_n = \frac{X_1 + X_2 + \ldots + X_n}{n}$$. $$\mu_n$$ is a random variable with mean $$E[X]$$ and variance $$\frac{\sigma^2}{n}$$ where $$\sigma^2$$ is the variance of random variable $$X$$. This implies that $$\mu_n$$ is an unbiased estimate of $$E[X]$$. However, the RMSE in the estimate of $$E[X]$$ by $$\mu_n$$ only reduces as $$O(n^{-1/2})$$. This is a bad news. If we want to improve our estimate by three decimal points, we need 1 million more data points. So a question comes, how can we reduce the variance in the Monte-Carlo estimate.
 
 # Reducing the variance in Monte-Carlo estimate
 Note that the variance in Monte-Carlo estimate of $$E[X]$$ is $$\frac{\sigma_X^2}{n}$$ where is $$n$$ is the number of samples and $$\sigma_X^2$$ is the variance of the $$X$$. There are two ways to reduce the estimate--1) by increasing $$n$$ or 2)by reducing $$\sigma_X$$. You may be thinking that $$\sigma_X$$ is a constant. How can we reduce it? You are correct. What I wanted to convey is a little bit more here. Lets get a new random variable $$Y$$ such that $$E[Y] = E[X]$$ and $$\sigma_Y < \sigma_X$$. Then we will compute the Monte-Carlo estimate of $$E[Y]$$. By doing this, we compute the Monte-Carlo estimate of $$E[X]$$. However, we will have less variance because $$\sigma_Y < \sigma_X$$. Precisely, we will apply this trick to reduce the variance in policy gradient algorithm.
@@ -71,7 +71,9 @@ $$
 
 where $$f(s_t)$$ is a random variable that depends on $$s_t$$ alone.
 
-We will first show that $$E[Y] = E[X]$$. To show this, we essentially need to show that $$E[\nabla_\theta\log \pi_\theta(a_t|s_t) f(s_t)] = 0$$. This is true because  
+We will first show that $$E[Y] = E[X]$$. To show this, we essentially need to show that
+$$ E[\nabla_\theta\log \pi_\theta(a_t|s_t) f(s_t)] = 0 $$. 
+This is true because  
 
 $$
 \begin{array}[ccc]
