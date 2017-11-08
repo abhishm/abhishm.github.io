@@ -87,7 +87,7 @@ According to openai gym documentation, the pong problem is defined as following:
 
 >  In this environment, the observation is an RGB image of the screen, which is an array of shape (210, 160, 3). Each action is repeatedly performed for a duration of $$k$$ frames, where $$k$$ is uniformly sampled from $$\{2,3,4\}$$.
 
-![double_q_network]({{site.baseurl}}/assets/images/2017-10-29-beyond_dqn/double_dqn_reward.png)
+![double_q_network]({{site.baseurl}}/assets/images/2017-10-20-beyond_dqn/double_dqn_reward.png)
 
 As you can from the above graph, the network was able to consistently win the game after 2 days of training. I haven't played with exploration parameter of $$\epsilon-$$greedy policy but I think it can be used to improve the performance of the algorithm rapidly especially by introducing a decay.
 
@@ -103,16 +103,16 @@ The above equation says that Q-values can be written as sum of advantage values 
 
 The above paper tells us that instead of computing the Q-values directly, we will compute the advantage $$A(s, a)$$ and values $$V(s)$$ first and then combine them to get the Q-values. Other than, this architectural change, the rest of the learning process is same as in the Q-learning. This architectural change in the network can be seen in the following figure.
 
- ![dueling_network_architecture]({{site.baseurl}}/assets/images/2017-10-29-beyond_dqn/dueling_network_architecture.png)
+ ![dueling_network_architecture]({{site.baseurl}}/assets/images/2017-10-20-beyond_dqn/dueling_network_architecture.png)
 
  The benefit of doing this architectural change is explained in the following figure in the paper.
 
- ![dueling_network_benefit]({{site.baseurl}}/assets/images/2017-10-29-beyond_dqn/dueling_network_benefit.png)
+ ![dueling_network_benefit]({{site.baseurl}}/assets/images/2017-10-20-beyond_dqn/dueling_network_benefit.png)
 
 The above figure is the saliency map of a trained model. These maps tell us that the most important pixels that are responsible for high activations in value-function and advantage-function. The left two figures are corresponding to a state where there is no immediate danger to the player and all the actions are safe. In this case, value function is looking at far in the future and focusing on a car that can be a potential threat in future while the saliency map of advantage-function does not show any importance to any pixel. In the right two figures, there are immediate dangers to the agent and the advantage-function learns to focus on those pixels that can cause these immediate danger while value-function is still focusing on the future rewards.
 
  In essence, the above figure tells us that the value network learns to look in far future and the advantage function learns to find the optimal action for the immediate future. By distributing the learning of immediate and future rewards to advantage and value-function respectively, dueling network is known to learn faster. It is also evident in our experiment as shown in the figure below.   
 
-![dueling_dqn_reward]({{site.baseurl}}/assets/images/2017-10-29-beyond_dqn/dueling_dqn_reward.png)
+![dueling_dqn_reward]({{site.baseurl}}/assets/images/2017-10-20-beyond_dqn/dueling_dqn_reward.png)
 
 As it can be seen from the above figure, dueling agent learns to play pong effectively within two hours of training.
