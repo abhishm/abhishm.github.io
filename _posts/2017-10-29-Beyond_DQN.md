@@ -32,10 +32,11 @@ Q-learning is inspired by approximating Bellman equation. In Q-learning, we star
 $$
 Q(s, a) \leftarrow (1 - \alpha)Q(s, a) + \alpha (r + \gamma \max_b Q(s', b))
 $$
+
 where $$\alpha$$ is the learning rate, $$r$$ is the immediate reward after taking action $$a$$ at sate $$s$$, $$\gamma$$ is the discount factor, and $$s'$$ is the next state seen in the trajectory. Note that if we make sufficient updates to $$Q-$$values according to the above equation, the $$Q-$$values will converge to an estimate that satisfies the following equation
 
 $$
-Q^'(s, a) = r + \gamma  E_{s'}[\max_{b} Q^'(s', b)
+Q'(s, a) = r + \gamma  E_{s'}[\max_{b} Q'(s', b)]
 $$
 
 
@@ -51,7 +52,7 @@ $$
 \tilde{Q}(s, a) \leftarrow (1 - \alpha)\tilde{Q}(s, a) + \alpha (r + \gamma \tilde{Q}(s', \arg\!\max_b \hat{Q}(s', b))
 $$
 
-Mainly, to update $$\tilde{Q}$$, use the optimal actions according to $$\hat(Q)(s, a)$$ and vice-versa. The [paper](https://papers.nips.cc/paper/3964-double-q-learning.pdf) suggests a periodic update where you alternatively switch between updating $$\hat{Q}$$ and $$\tilde{Q}$$.
+Mainly, to update $$\tilde{Q}$$, use the optimal actions according to $$\hat{Q}(s, a)$$ and vice-versa. The [paper](https://papers.nips.cc/paper/3964-double-q-learning.pdf) suggests a periodic update where you alternatively switch between updating $$\hat{Q}$$ and $$\tilde{Q}$$.
 The authors proves that by using the two estimates of Q-learning, you can overcome the problem of switching between max and expectation operator and the new method provides an unbiased estimate of $$\max_b E_{s'}[Q^*(s', b)]$$.
 
 Note that in DQN network, the update rule is as following:
@@ -60,7 +61,7 @@ $$
 w = \arg\!\min\left(f^w(s, a) - \left(r + \max_b(f^{w’}(s’, b)\right) \right)^2
 $$
 
-where $$w$$ and $$w'$$ represent the weights of Q-network and target-network respectively and $$f$$ is the neural-network architecture of Q and target network.
+where $$w$$ and $$w'$$ represent the weights of Q-network and target-network respectively and $$f$$ is the neural-network architecture that is used as function approximator for Q-values.
 
 The Double DQN approach  is just a slight modification of the above equation where we will use the Q-network to find the actions for the update as shown in the following equation:
 
@@ -98,7 +99,7 @@ $$
 Q(s, a) = A(s, a) + V(s)
 $$
 
-The above equation says that Q-values can be written as sum of advantage values ($$A(s, a)$$) and value function ($$V(s)$$). As it can be seen from the equation, the advantage function tells us the `goodness` of an action at a state compare to the average total reward at this state ($$V(s)$$).
+The above equation says that Q-values can be written as sum of advantage values $$A(s, a)$$ and value function $$V(s)$$. As it can be seen from the equation, the advantage function tells us the `goodness` of an action at a state compare to the average total reward at this state $$V(s)$$.
 
 The above paper tells us that instead of computing the Q-values directly, we will compute the advantage $$A(s, a)$$ and values $$V(s)$$ first and then combine them to get the Q-values. Other than, this architectural change, the rest of the learning process is same as in the Q-learning. This architectural change in the network can be seen in the following figure.
 
@@ -114,4 +115,4 @@ The above figure is the saliency map of a trained model. These maps tell us that
 
 ![dueling_dqn_reward]({{site.baseurl}}/assets/images/2017-10-29-beyond_dqn/dueling_dqn_reward.png)
 
-As it can be seen from the above figure, dueling agent learns to play pong effectively within two hours of training. 
+As it can be seen from the above figure, dueling agent learns to play pong effectively within two hours of training.
