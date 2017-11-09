@@ -116,3 +116,33 @@ The above figure is the saliency map of a trained model. These maps tell us that
 ![dueling_dqn_reward]({{site.baseurl}}/assets/images/2017-10-20-beyond_dqn/dueling_dqn_reward.png)
 
 As it can be seen from the above figure, dueling agent learns to play pong effectively within two hours of training.
+
+Moreover, implementing dueling network is also easy. There is only one small detail that we need to take care of. Note that Q-values are the summations of advantage and value function. Note that if we decrease the advantage-function by a constant and increase the state-values by the same constant, we will get the same Q-values. We are training on Bellman error in Q-values and there is no way for us to know the exact advantage and state values and this can cause instability in the learning. To overcome this problem, the authors proposed a solution to put a constraint on Advantage function. The constraint that the authors proposed is that the mean of advantage values for all the actions is zero. With this constraint, the whole model for the Dueling network can be few lines of python code in tensorflow.
+
+```python
+def dueling_network(states, is_training=False):
+    W1 = tf.get_variable("W1", [state_dim, 20],
+                         initializer=tf.random_normal_initializer())
+    b1 = tf.get_variable("b1", [20],
+                         initializer=tf.constant_initializer(0))
+    z1 = tf.matmul(states, W1) + b1
+    bn1 = z1
+    if use_batch_norm:
+        bn1 = batch_norm_wrapper(z1, is_training)
+    h1 = tf.nn.relu(bn1)
+    W_a = tf.get_variable("W_a", [20, num_actions],
+                         initializer=tf.random_normal_initializer())
+    b_a = tf.get_variable("b_a", [num_actions],
+                         initializer=tf.constant_initializer(0))
+    a = tf.matmul(h1, W_a) + b_a
+    a = a - tf.reduce_mean(a, axis=1, keep_dims=True)
+
+    W_v = tf.get_variable("W_v", [20, 1],
+                        initializer=tf.random_normal_initializer())
+    b_v = tf.get_variable("b_v", [1],
+                        initializer=tf.constant_initializer(0))
+
+    v = tf.matmul(h1, W_v) + b_v
+    q = a + v
+    return q
+```
