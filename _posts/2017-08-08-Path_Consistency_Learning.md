@@ -29,7 +29,7 @@ To understand the consistency criterion, look at the following figure.
 
 ![transition]({{site.baseurl}}/assets/images/2017-08-08-PCL/transitions_horizontal.png)
 
-Assume that we collected a trajectory and in one portion of the trajectory we see the above transitions. Assume that 
+Assume that we collected a trajectory and in one portion of the trajectory we see the above transitions. Assume that
 $$\pi^{*}(\cdot|s)$$ is the optimal policy and $$V^{*}(s)$$ is the value function of the optimal policy then the `Path Consistency` criterion says that $$\pi^{*}(s)$$ and $$V^{*}(s)$$ must satisfy the following equation:
 
 $$
@@ -88,7 +88,7 @@ By recursively writing the equation for next states ($$V^*(s_i)$$) until the des
 
 #### Using Path Consistency Learning to solve a reinforcement learning problem when we have access to off-policy data
 
-The approach is similar to the way we use policy gradient algorithm. Lets assume that the policy is 
+The approach is similar to the way we use policy gradient algorithm. Lets assume that the policy is
 $$\pi_\theta(\cdot|s)$$ that is parameterized by parameter $$\theta$$, and the value function $$V_w(s)$$ is parameterized by parameter $$w$$. We get a portion of trajectory from off-policy data. Consider that the portion is $$\{(s_0, a_0, r_0), (s_{1}, a_{1}, r_{1}), \cdots, (s_N, a_N, r_N)\}$$. We will compute the path consistency loss for the present policy as the following:
 
 $$
@@ -105,7 +105,7 @@ For this demo purpose, I chose the Cartpole environment to apply the Path Consis
 According to [openai gym documentation](https://gym.openai.com/envs/CartPole-v0), the cartpole problem is defined as following:
 
 >**Cartpole:** A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of $$+1$$ or $$−1$$ to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of $$+1$$ is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than $$2.4$$ units from the center.
->> **Goal:**  We set our time horizon to $$200$$ time steps. In our experience, we found out that $$200$$ is a sufficiently big number to ensure that we found a good policy to balance the cartpole for ever. Our goal is to create an agent that can keep the Cartpole stable for the $$200$$ time-steps using the DQN algoirthm. The maximum reward that we can obtained in this environment is $$200$$.
+>> **Goal:**  We set our time horizon to $$200$$ time steps. In our experience, we found out that $$200$$ is a sufficiently big number to ensure that we found a good policy to balance the cartpole for ever. Our goal is to create an agent that can keep the Cartpole stable for the $$200$$ time-steps using the PCL algorithm. The maximum reward that we can obtained in this environment is $$200$$.
 
 ## Results
 
