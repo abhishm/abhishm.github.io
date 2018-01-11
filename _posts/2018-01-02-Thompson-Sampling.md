@@ -23,20 +23,14 @@ Assume that there are two restaurants $$A$$ and $$B$$. Assume that restaurant $$
 
 The idea behind Thompson Sampling is inspired by Bayesian Inference. Lets try to present the main idea behind Thompson Sampling as succinctly as possible below:
 
->
+
 1. Lets assume that we have priors on unknown parameters that affects the reward for our bandit problem. In our restaurant example, the parameters are $$\theta_1$$ and $$\theta_2$$. The reward for bandit problem is essentially $$\theta_1$$ and $$\theta_2$$ which are the measure of goodness of the restaurant.
-
->2. We sample a value of unknown parameters from this prior distribution.
-
->3. We compute the reward from these sampled parameters.
-
->4. We choose the actions which gives the highest reward.
-
->5. We observe the actual reward gathered by taking our action.
-
->6. We update the priors on the parameters using the observed reward.
-
->7. We repeat the above procedure using the new posterior distribution.
+2. We sample a value of unknown parameters from this prior distribution.
+3. We compute the reward from these sampled parameters.
+4. We choose the actions which gives the highest reward.
+5. We observe the actual reward gathered by taking our action.
+6. We update the priors on the parameters using the observed reward.
+7. We repeat the above procedure using the new posterior distribution.
 
 # Thompson Sampling in Action
 
@@ -50,4 +44,4 @@ Now lets apply the Thompson Sampling to our restaurant hunting problem and see h
 4. Now we need to update the distribution for $$\theta_1$$ based on the reward that we observed in the previous step. Since our prior distribution was the beta-distribution, it is easy to do as described below:
 > If your prior distribution for $$\theta_1$$ is $$B(\alpha, \beta)$$ you receive the reward $$r$$ for going to restaurant $$A$$ then the posterior probability distribution for $$\theta_1$$ is $$B(\alpha + r, \beta + (1 -r))$$.
 
-5. Now to choose a restaurant second time, you sample new values for $$\theta_1$$ and $$\theta_2$$ but you use the updated probability distribution for the restaurant $$A$$ that was chosen in the first trail and you keep going on like that to choose restaurants. 
+5. Now to choose a restaurant second time, you sample new values for $$\theta_1$$ and $$\theta_2$$ but you use the updated probability distribution for the restaurant $$A$$ that was chosen in the first trail and you keep going on like that to choose restaurants.
