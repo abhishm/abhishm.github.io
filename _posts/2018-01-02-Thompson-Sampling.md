@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Thompson Sampling for Contextual Multi-arm bandit 
+title: Thompson Sampling for Contextual Multi-arm bandit
 author: "Abhishek Mishra"
 ---
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
@@ -18,7 +18,7 @@ Multi-arm bandit is a colorful name for a problem we daily face in our lives giv
 
 # Thompson Sampling
 
-Assume that there are two restaurants $$A$$ and $$B$$. Assume that restaurant $$A$$ on an average $$\theta_1$$ times align to your taste and restaurant $$B$$ on an average $$\theta_2$$ times align to your taste. In other words, if you go to restaurant $$A$$ $$N$$ times then you will like the experience $$\theta_1 N$$ times and if you go to restaurants $$B$$ $$N$$ times then you will like the experience $$\theta_2 N$$ times where $$\theta_1$$ and $$\theta_2$$ are some numbers between $$0$$ and $$1$$. Unfortunately these numbers $$\theta_1$$ and $$\theta_2$$ are not known to you so you cannot know which restaurant you should choose. You go to restaurant very often and you want to maximize your chances of having good experiences in the restaurants during your life time. How should you choose these restaurants based on your experiences so far? Thompson Sampling comes to rescue here.
+Assume that there are two restaurants $$A$$ and $$B$$. Assume that restaurant $$A$$ on an average $$\theta_1$$ times align to your taste and restaurant $$B$$ on an average $$\theta_2$$ times align to your taste. In other words, if you go to restaurant $$A$$, $$N$$ times, then you will like the experience $$\theta_1 N$$ times and if you go to restaurants $$B$$, $$N$$ times, then you will like the experience $$\theta_2 N$$ times where $$\theta_1$$ and $$\theta_2$$ are some numbers between $$0$$ and $$1$$. Unfortunately these numbers $$\theta_1$$ and $$\theta_2$$ are not known to you so you cannot know which restaurant you should choose. You go to restaurant very often and you want to maximize your chances of having good experiences in the restaurants during your life time. How should you choose these restaurants based on your experiences so far? Thompson Sampling comes to rescue here.
 
 
 The idea behind Thompson Sampling is inspired by Bayesian Inference. Lets try to present the main idea behind Thompson Sampling as succinctly as possible below:
@@ -32,7 +32,7 @@ The idea behind Thompson Sampling is inspired by Bayesian Inference. Lets try to
 6. We update the priors on the parameters using the observed reward.
 7. We repeat the above procedure using the new posterior distribution.
 
-# Thompson Sampling in Action
+# Thompson Sampling in action
 
 Now lets apply the Thompson Sampling to our restaurant hunting problem and see how does it help us in resolving the problem.
 1. Since we don't know anything about the restaurants initially, we can assume that the $$\theta_1$$ and $$\theta_2$$ parameters are uniformly distributed between $$0$$ and $$1$$. Note that we can also write a uniform distribution between $$0$$ and $$1$$ as a beta-distribution $$B(1, 1)$$. Please read more about the beta-distribution [here](https://en.wikipedia.org/wiki/Beta_distribution) which is going to be helpful in understanding the upcoming text.
@@ -45,3 +45,5 @@ Now lets apply the Thompson Sampling to our restaurant hunting problem and see h
 > If your prior distribution for $$\theta_1$$ is $$B(\alpha, \beta)$$ you receive the reward $$r$$ for going to restaurant $$A$$ then the posterior probability distribution for $$\theta_1$$ is $$B(\alpha + r, \beta + (1 -r))$$.
 
 5. Now to choose a restaurant second time, you sample new values for $$\theta_1$$ and $$\theta_2$$ but you use the updated probability distribution for the restaurant $$A$$ that was chosen in the first trail and you keep going on like that to choose restaurants.
+
+Now lets see how does Thompson Sampling helps us in finding the best restaurant. We will simulate this behavior. For this simulation, we will assume that the true value of $$\theta_1$$ is $$0.9$$ and true value of $$\theta_2$$ is $$0.7$$. We would like to see that as we go more and more often Thompson Sampling would recommend us restaurant $$A$$ more and more.
