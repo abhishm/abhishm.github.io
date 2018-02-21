@@ -67,4 +67,18 @@ Contextual Thompson Sampling is precisely the answer of the above questions that
 
 # Contextual Thompson Sampling
 
-Following the previous case (Simple Thompson Sampling), we will first use a mathematical abstraction to explain Contextual Thompson Sampling. Further, we will elaborate this concept with the help of our ongoing restaurant search problem.  
+Following the previous case (Simple Thompson Sampling), we will first use a mathematical abstraction to explain Contextual Thompson Sampling. Further, we will elaborate this concept with the help of our ongoing restaurant search problem.
+
+As is suggested in the name, in Contextual Thompson Sampling there is a context that we will use to select arms in a multi-arm bandit problem. The context vector encapsulates  all the side information that we think can be useful for determining the best arm. Lets denote a context vector by the symbol $$x$$. For each arm, we want to determine a set of parameters $$\theta$$ that can tell us how to choose an arm given a context. We will assume that we also know a  function $$f$$ that tells us the relationship between parameter vector $$\theta$$, context vector $$x$$, and expected reward $$r$$ of the arm. In essence,
+
+$$
+\mathbb{E}[r(x)] = f(x; \theta)
+$$
+
+You may say that it is difficult to know the function $$f$$ but we can always choose $$f$$ to be a high capacity neural network model that can model even very complex relationship between $$x$$ and $$\theta$$. Although training time of such a high capacity neural network model can be very large because it would require lot of data.
+
+The training process of Contextual Thompson Sampling is similar to Simple Thompson Sampling.
+
+1. For each arm $$a$$, we assume that $$\theta_a$$ is distributed as $$D(\alpha_a)$$ where $$\alpha$$ are the parameters of the distribution.
+
+2. For each arm, we will generate    
