@@ -75,10 +75,13 @@ $$
 \mathbb{E}[r(x)] = f(x; \theta)
 $$
 
-You may say that it is difficult to know the function $$f$$ but we can always choose $$f$$ to be a high capacity neural network model that can model even very complex relationship between $$x$$ and $$\theta$$. Although training time of such a high capacity neural network model can be very large because it would require lot of data.
+You may say that it is difficult to know the function $$f$$ but we can always choose $$f$$ to be a high capacity neural network model that can model even very complex relationship between $$x$$ and $$\theta$$. Although training time of such a high capacity neural network model can be long because it would require lot of data.
 
 The training process of Contextual Thompson Sampling is similar to Simple Thompson Sampling.
 
-1. For each arm $$a$$, we assume that $$\theta_a$$ is distributed as $$D(\alpha_a)$$ where $$\alpha$$ are the parameters of the distribution.
-
-2. For each arm, we will generate    
+1. At time $$t=0$$, we observe a context $$x_0$$.
+2. For each arm $$a$$, we assume that $$\theta_a$$ is distributed according to the probability distribution $$D(\alpha_a)$$ where $$\alpha$$ are the parameters of the distribution.
+3. For each arm, we will start with some initial value of $$\alpha_a$$. Lets call this initial value $$\alpha_a(0)$$.
+4. We will sample $$\theta_a$$ according to the distribution $$D(\alpha_a(0))$$ for each arm $$a$$.
+5. We will compute the expected reward $$f(x_0, \theta_a)$$ for each arm. We choose the arm that has the maximum value of $$f(x_0, \theta_a)$$
+6. We observe the actual reward $$r_0$$ for playing this arm. 
