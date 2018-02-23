@@ -80,8 +80,12 @@ You may say that it is difficult to know the function $$f$$ but we can always ch
 The training process of Contextual Thompson Sampling is similar to Simple Thompson Sampling.
 
 1. At time $$t=0$$, we observe a context $$x_0$$.
-2. For each arm $$a$$, we assume that $$\theta_a$$ is distributed according to the probability distribution $$D(\alpha_a)$$ where $$\alpha$$ are the parameters of the distribution.
+2. For each arm $$a$$, we assume that $$\theta_a$$ is distributed according to the probability distribution $$D(\alpha_a)$$ where $$\alpha_a$$ are the parameters of the distribution.
 3. For each arm, we will start with some initial value of $$\alpha_a$$. Lets call this initial value $$\alpha_a(0)$$.
 4. We will sample $$\theta_a$$ according to the distribution $$D(\alpha_a(0))$$ for each arm $$a$$.
-5. We will compute the expected reward $$f(x_0, \theta_a)$$ for each arm. We choose the arm that has the maximum value of $$f(x_0, \theta_a)$$
-6. We observe the actual reward $$r_0$$ for playing this arm. 
+5. We will compute the expected reward $$f(x_0, \theta_a)$$ for each arm.
+6. We choose the arm that has the maximum value of $$f(x_0, \theta_a)$$
+7. We observe the actual reward $$r_0$$ for playing this arm.
+8. We repeat the above process $$N$$ times.
+9. Subsequently, we update the parameters $$\alpha_a$$ for each arm using the maximum likelihood estimator of $$\alpha_a$$ after observing the reward $$r$$.
+10. We keep repeating the above process until some predefined convergence criterion is met.
