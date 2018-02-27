@@ -89,3 +89,16 @@ The training process of Contextual Thompson Sampling is similar to Simple Thomps
 8. We repeat the above process $$N$$ times.
 9. Subsequently, we update the parameters $$\alpha_a$$ for each arm using the maximum likelihood estimator of $$\alpha_a$$ after observing the reward $$r$$.
 10. We keep repeating the above process until some predefined convergence criterion is met.
+
+
+# Contextual Thompson Sampling for Restaurant Searching Problem
+
+Lets first consider the context vector. Assume that the context vector consists of following elements: day of the week, and weather. Consider the following property of each of the context field:
+
+1. **Day of week:** This feature represents the day that we visit the restaurant. We are assuming that if there is some impact of day of week on us liking the restaurant that Thompson Sampling will be successfully able to capture this impact.
+
+2. **Weather:** This feature represents the weather we visit the restaurant. Assume that this field can be of one of two types: hot weather or cold weather.
+
+Now lets make the most important assumption. Assume that we like restaurant $$A$$ when the weather is hot and we like restaurant $$B$$ when weather is cold. In other words, only the weather field in the context vector that gives us the significant information about us liking a restaurant.
+
+In Thompson Sampling, the context vector consists of day of week and weather. We use the [one-hot](https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f) encoded representation to represent this context vector.   
