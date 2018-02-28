@@ -106,10 +106,10 @@ In Thompson Sampling, the context vector consists of day of week and weather. We
 We further assume that the expected reward of a restaurant is a linear function of context vector and the restaurant parameters ($$\theta_A$$ and $$\theta_B$$). In mathematical terms,
 
 $$
-\begin{eqnarray}[ccc]
+\begin{eqnarray}{ccc}
 E[r_A] &=& \theta_A^Tx \\
 E[r_B] &=& \theta_B^Tx
 \end{eqnarray}
 $$
 
-We further assume that prior distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathbb{N}{\mu_A, \sigma_A^2\mathcal{I}}$$ and  $$\mathbb{N}{\mu_B, \sigma_B^2\mathcal{I}}$$ respectively.
+We further assume that prior distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathcal{N}(\mu_A, \sigma_A^2\mathcal{I})$$ and  $$\mathcal{N}(\mu_B, \sigma_B^2\mathcal{I})$$ respectively.
