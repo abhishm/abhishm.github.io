@@ -102,3 +102,14 @@ Lets first consider the context vector. Assume that the context vector consists 
 Now lets make the most important assumption. Assume that we like restaurant $$A$$ when the weather is hot and we like restaurant $$B$$ when weather is cold. In other words, only the weather field in the context vector that gives us the significant information about us liking a restaurant.
 
 In Thompson Sampling, the context vector consists of day of week and weather. We use the [one-hot](https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f) encoded representation to represent this context vector.   
+
+We further assume that the expected reward of a restaurant is a linear function of context vector and the restaurant parameters ($$\theta_A$$ and $$\theta_B$$). In mathematical terms,
+
+$$
+\begin{eqnarray}[ccc]
+E[r_A] &=& \theta_A^Tx \\
+E[r_B] &=& \theta_B^Tx
+\end{eqnarray}
+$$
+
+We further assume that prior distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathbb{N}{\mu_A, \sigma_A^2\mathcal{I}}$$ and  $$\mathbb{N}{\mu_B, \sigma_B^2\mathcal{I}}$$ respectively.
