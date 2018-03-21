@@ -112,4 +112,4 @@ E[r_B] &=& \theta_B^Tx
 \end{eqnarray}
 $$
 
-We further assume that initial distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathcal{N}(\mu_A(0), \sigma_A^2(0)\mathcal{I})$$ and  $$\mathcal{N}(\mu_B(0), \sigma_B^2(0)\mathcal{I})$$ respectively. We also assume that after observing the reward for each restaurant, posterior distribution of $$\theta_A$$ and $$\theta_B$$ also remains a Gaussian Distribution. 
+We further assume that initial distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathcal{N}(\mu_A(0), \sigma_A^2(0)\mathcal{I})$$ and  $$\mathcal{N}(\mu_B(0), \sigma_B^2(0)\mathcal{I})$$ respectively. Now our goal is to find the posterior distribution for $$\theta_A$$ and $$\theta_B$$ after looking at our observations. Fortunately, it is easy to do with the help of Laplace Approximation. 
