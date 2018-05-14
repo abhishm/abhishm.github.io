@@ -101,7 +101,7 @@ Lets first consider the context vector. Assume that the context vector consists 
 
 Now lets make the most important assumption. Assume that we like restaurant $$A$$ when the weather is hot and we like restaurant $$B$$ when weather is cold. In other words, only the weather field in the context vector that gives us the significant information about us liking a restaurant.
 
-In Thompson Sampling, the context vector consists of day of week and weather. We use the [one-hot](https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f) encoded representation to represent this context vector.   
+In Thompson Sampling, the context vector consists of day of week and weather. We use the [one-hot](https://hackernoon.com/what-is-one-hot-encoding-why-and-when-do-you-have-to-use-it-e3c6186d008f) encoded representation to represent this context vector. So our context vector for the restaurant search problem is $$9$$ dimensional vector. The first seven dimension out of these $$9$$ dimensions represent day of week. The next $$2$$ dimension represent the weather. For example, if the context vector is $$[1, 0, 0, 0, 0, 0, 0, 1, 0]$$, then it implies that we are visiting the restaurant in a hot day where day of week is Monday.   
 
 We further assume that the expected reward of a restaurant is a linear function of context vector and the restaurant parameters ($$\theta_A$$ and $$\theta_B$$). In mathematical terms,
 
@@ -112,4 +112,18 @@ E[r_B] &=& \theta_B^Tx
 \end{eqnarray}
 $$
 
-We further assume that initial distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathcal{N}(\mu_A(0), \sigma_A^2(0)\mathcal{I})$$ and  $$\mathcal{N}(\mu_B(0), \sigma_B^2(0)\mathcal{I})$$ respectively. Now our goal is to find the posterior distribution for $$\theta_A$$ and $$\theta_B$$ after looking at our observations. Fortunately, it is easy to do with the help of Laplace Approximation. 
+We further assume that initial distribution of parameters $$\theta_A$$ and $$\theta_B$$ for restaurant $$A$$ and restaurant $$B$$ are normally distributed with $$\mathcal{N}(\mu_A(0), \Sigma_A^2(0)\mathcal{I})$$ and  $$\mathcal{N}(\mu_B(0), \Sigma_B^2(0)\mathcal{I})$$ respectively. Now our goal is to find the posterior distribution for $$\theta_A$$ and $$\theta_B$$ after looking at our observations. Fortunately, it is easy to do with the help of Laplace Approximation. In short, we are applying the Bayesian Logistic Regression in a sequence. [This](http://www.cedar.buffalo.edu/~srihari/CSE574/Chap4/4.4-Laplace.pdf) is a  good tutorial on Laplace Approximation.
+
+But in short, the result are as following:
+
+1. Assume that we visited restaurant $$$$,  $$n$$ times.
+2. The context for these $$n$$ times was $$x_1, x_2, \cdots, x_n$$ which is a $$9$$ dimensional vector.
+3. Our experience at these $$n$$ times is denoted by $$y_1, y_2, \cdots, y_n$$ which is a binary number $$0$$ or $$1$$.
+4. The formula to update the mean parameter $$\mu_A(0)$$ for restaurant $$A$$ is
+$$
+\mu_A(1) = \arg\!\max_{w} \sum_{i=1}^n\left(\text{sigmoid}((2 * y - 1) w^T x_i)) - \frac{1}{2}(w - \mu_A(0))^T \Sigma_A(0)^{-1} (w - \mu_A(0))\right)
+$$
+5. The formula to update the variance parameter $$\Sigma_A(0)$$ is as following
+$$
+\Sigma_A^{-1}(1) = \Sigma_A^{-1}(0) + \sum_{i=1}^N \text{sigmoid}((2 * y - 1) w^T x_i) * (1 - \text{sigmoid}((2 * y - 1) w^T x_i)) (x_ix_i^T) 
+$$
