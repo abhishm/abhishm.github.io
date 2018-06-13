@@ -116,7 +116,7 @@ We further assume that initial distribution of parameters $$\theta_A$$ and $$\th
 
 But in short, the result are as following:
 
-1. Assume that we visited restaurant $$$$,  $$n$$ times.
+1. Assume that we visited restaurant $$A$$,  $$n$$ times.
 2. The context for these $$n$$ times was $$x_1, x_2, \cdots, x_n$$ which is a $$9$$ dimensional vector.
 3. Our experience at these $$n$$ times is denoted by $$y_1, y_2, \cdots, y_n$$ which is a binary number $$0$$ or $$1$$.
 4. The formula to update the mean parameter $$\mu_A(0)$$ for restaurant $$A$$ is
@@ -125,5 +125,5 @@ $$
 $$
 5. The formula to update the variance parameter $$\Sigma_A(0)$$ is as following
 $$
-\Sigma_A^{-1}(1) = \Sigma_A^{-1}(0) + \sum_{i=1}^N \text{sigmoid}((2 * y - 1) w^T x_i) * (1 - \text{sigmoid}((2 * y - 1) w^T x_i)) (x_ix_i^T) 
+\Sigma_A^{-1}(1) = \Sigma_A^{-1}(0) + \sum_{i=1}^N \text{sigmoid}((2 * y - 1) w^T x_i) * (1 - \text{sigmoid}((2 * y - 1) w^T x_i)) (x_ix_i^T)
 $$
