@@ -14,6 +14,8 @@ author: "Abhishek Mishra"
 
 # Goal
 
+[code](https://github.com/abhishm/dark_knowledge)
+
 It is a common trend in machine learning competitions to train many models and then combine these models using an ensemble approach. This model could be very big and can cause inference to be very slow. Can we somehow transfer all the knowledge learned by this big model to a smaller network? The answer to this question is yes. In this post, we will learn about the [work](https://arxiv.org/abs/1503.02531) of [Geoffrey Hinton](https://en.wikipedia.org/wiki/Geoffrey_Hinton) where he distills the knowledge of a big cumbersome neural network into a smaller and more manageable network.
 
 # How do we transfer the knowledge of the ensemble model to a smaller network?
